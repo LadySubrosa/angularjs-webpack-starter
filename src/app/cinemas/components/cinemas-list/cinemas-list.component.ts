@@ -4,18 +4,18 @@
 import './cinemas-list.component.scss';
 
 class CinemasListController {
-  cinemas: { cinemaId: string, cinemaName: string }[];
+  cinemas: { id: string, name: string }[];
 }
 
 export class CinemasList implements angular.IComponentOptions {
   static selector = 'cinemasList';
   static bindings = {
-    cinemas: '<',
+    cinemas: '=',
   };
   static controller = CinemasListController;
   static template = `
   <div class="cinemas-list" ng-repeat="cinema in $ctrl.cinemas">
-   <button>{{ cinema.cinemaName }}</button>
+   <button>{{ cinema.name }}</button>
    </div>
   `;
 }

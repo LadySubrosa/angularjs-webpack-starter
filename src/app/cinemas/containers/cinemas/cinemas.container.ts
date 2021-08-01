@@ -6,22 +6,29 @@ import { CinemasService } from '../../services/cinemas.service';
 import './cinemas.container.scss';
 
 class CinemasController {
-  cinemas: { cinemaId: string, cinemaName: string }[];
+  cinemas: { id: string, name: string }[];
 
   constructor(
+    private $scope: ng.IScope,
     private cinemasService: CinemasService
   ) {
     'ngInject';
   }
 
-  $onInit() {
-    this.fetchData();
+  async $onInit() {
+    await this.fetchData();
+    this.cinemas.forEach(cinema => {
+      console.log(cinema);
+    });
   }
 
-  private fetchData() {
-    this.cinemasService.getAllCinemas()
+  private async fetchData() {
+
+    await this.cinemasService.getAllCinemas()
       .then(cinemasData => {
-        this.cinemas = cinemasData;
+        this.$scope.$apply(() => {
+          this.cinemas = cinemasData;
+        });
       });
   }
 }

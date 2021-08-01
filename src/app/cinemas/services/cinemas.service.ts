@@ -1,24 +1,38 @@
-// get list of cinemas for a market
-// todo use real data!
+const apiUrl = 'https://drafthouse.com/s/mother/v1/page/market/main/austin';
 export class CinemasService {
   static selector = 'cinemasService';
-  cinemas: { cinemaId: string, cinemaName: string }[] = [{
-    cinemaId: '0008',
-    cinemaName: 'Mueller'
+  cinemas: { id: string, name: string }[] = [{
+    id: '0008',
+    name: 'Mueller'
   },
   {
-    cinemaId: '0006',
-    cinemaName: 'Slaughter Lane'
+    id: '0006',
+    name: 'Slaughter Lane'
   }
   ];
 
   constructor(
-    private $q: angular.IQService
+    private $q: angular.IQService,
+    private $http: angular.IHttpService
   ) {
     'ngInject';
   }
 
-  getAllCinemas() {
-    return this.$q.resolve(this.cinemas);
+  async getCinemasFromAlamo() {
+    try {
+      // const { data: { market: { cinemas } } } = await (await fetch(apiUrl)).json();
+      // return cinemas;
+      const { market: { cinemas } } = await this.$http.get(apiUrl, { responseType: 'json' }).then((response: any) => {
+        return response.data.data;
+      });
+      return cinemas;
+    } catch (exception) {
+      console.error(exception);
+    }
+  }
+
+  async getAllCinemas() {
+    const cinemas = await this.getCinemasFromAlamo();
+    return this.$q.resolve(cinemas);
   }
 }
