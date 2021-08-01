@@ -6,10 +6,15 @@ import * as angular from 'angular';
  */
 import { moduleName as coreModule } from './core/core.module';
 import { moduleName as contactsModule } from './contacts/contacts.module';
+import { moduleName as moviesModule } from './movies/movies.module';
+import { moduleName as cinemasModule } from './cinemas/cinemas.module';
+
 
 export const moduleName =
   angular.module('application', [
     coreModule,
-    contactsModule
+    contactsModule,
+    moviesModule,
+    cinemasModule,
   ])
-  .name;
+    .name;

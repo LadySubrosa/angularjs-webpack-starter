@@ -1,0 +1,21 @@
+/**
+ * Import the Component styles
+ */
+import './cinemas-list.component.scss';
+
+class CinemasListController {
+  cinemas: { cinemaId: string, cinemaName: string }[];
+}
+
+export class CinemasList implements angular.IComponentOptions {
+  static selector = 'cinemasList';
+  static bindings = {
+    cinemas: '<',
+  };
+  static controller = CinemasListController;
+  static template = `
+  <div class="cinemas-list" ng-repeat="cinema in $ctrl.cinemas">
+   <button>{{ cinema.cinemaName }}</button>
+   </div>
+  `;
+}
