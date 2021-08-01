@@ -3,5 +3,13 @@ cinemas {
     border: solid 1px purple;
     display: block;
     margin-bottom: 15px;
+    button {
+      border: solid 1px;
+      border-radius: 0;
+      &.selected {
+        background: orange;
+        color: #000;
+      }
+    }
   }
 }

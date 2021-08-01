@@ -7,6 +7,7 @@ import './cinemas.container.scss';
 
 class CinemasController {
   cinemas: { id: string, name: string }[];
+  selectedCinema: { id: string, name: string };
 
   constructor(
     private $scope: ng.IScope,
@@ -17,13 +18,26 @@ class CinemasController {
 
   async $onInit() {
     await this.fetchData();
-    this.cinemas.forEach(cinema => {
-      console.log(cinema);
+    console.log(this.cinemas);
+    this.setSelectedCinema(this.cinemas[0].id);
+    console.log('selected cinema on init', this.selectedCinema);
+  }
+
+
+  setSelectedCinema(id: string) {
+    this.$scope.$evalAsync(() => {
+      this.cinemasService.updateSelectedCinema(id);
+    });
+    this.$scope.$evalAsync(() => {
+      this.selectedCinema = this.getSelectedCinema();
     });
   }
 
-  private async fetchData() {
+  getSelectedCinema() {
+    return this.cinemasService.getSelectedCinema();
+  }
 
+  private async fetchData() {
     await this.cinemasService.getAllCinemas()
       .then(cinemasData => {
         this.$scope.$apply(() => {
@@ -40,7 +54,8 @@ export class CinemasContainer implements angular.IComponentOptions {
   <div class="row">
     <div class="col-md-12">
       <h1>Cinemas in Austin</h1>
-      <cinemas-list cinemas="$ctrl.cinemas"></cinemas-list>
+      {{ $ctrl.selectedCinema.name }}
+      <cinemas-list cinemas="$ctrl.cinemas" selected-cinema="$ctrl.selectedCinema.id" update-cinema="$ctrl.setSelectedCinema($event.id)"></cinemas-list>
     </div>
   </div>
   `;

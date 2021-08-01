@@ -1,6 +1,7 @@
 const apiUrl = 'https://drafthouse.com/s/mother/v1/page/market/main/austin';
 export class CinemasService {
   static selector = 'cinemasService';
+  selectedCinema: { id: string, name: string } = { id: '', name: '' };
   cinemas: { id: string, name: string }[] = [{
     id: '0008',
     name: 'Mueller'
@@ -18,10 +19,21 @@ export class CinemasService {
     'ngInject';
   }
 
+  updateSelectedCinema(id: string) {
+    this.selectedCinema = this.cinemas.find(cinema => cinema.id === id);
+  }
+
+  getSelectedCinema() {
+    if (this.selectedCinema.id === '') {
+      this.getAllCinemas();
+      this.updateSelectedCinema(this.cinemas[0].id);
+    }
+
+    return this.selectedCinema;
+  }
+
   async getCinemasFromAlamo() {
     try {
-      // const { data: { market: { cinemas } } } = await (await fetch(apiUrl)).json();
-      // return cinemas;
       const { market: { cinemas } } = await this.$http.get(apiUrl, { responseType: 'json' }).then((response: any) => {
         return response.data.data;
       });
@@ -33,6 +45,7 @@ export class CinemasService {
 
   async getAllCinemas() {
     const cinemas = await this.getCinemasFromAlamo();
+    this.cinemas = cinemas;
     return this.$q.resolve(cinemas);
   }
 }
