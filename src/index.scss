@@ -9,5 +9,15 @@
  **/
 
 body {
-  background-color: #f3f3f3;
+  background: #f3f3f3;
+  &::before {
+    clip-path: polygon(0% 0%, 100% 0%, 100% 80%, 0% 100%);
+    content: '';
+    z-index: -10;
+    display: block;
+    position: absolute;
+    height: 500px;
+    width: 100%;
+    background: linear-gradient(135.99deg, #ff009d 3.42%, #f5b324 96.5%);
+  }
 }

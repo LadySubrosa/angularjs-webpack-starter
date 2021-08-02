@@ -9,5 +9,5 @@ export const routing = ($stateProvider: angular.ui.IStateProvider, $urlRouterPro
       component: App.selector
     });
 
-    $urlRouterProvider.otherwise('/app/contact');
+  $urlRouterProvider.otherwise('/app/cinemas');
 };

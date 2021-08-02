@@ -26,7 +26,7 @@ export class CinemasList implements angular.IComponentOptions {
   };
   static controller = CinemasListController;
   static template = `
-  <div class="cinemas-list" ng-repeat="cinema in $ctrl.cinemas">
+  <div class="cinema" ng-repeat="cinema in $ctrl.cinemas">
    <button ng-class="{selected : $ctrl.selectedCinema === cinema.id}" ng-click="$ctrl.setUpdateCinema(cinema.id)">{{ cinema.name }}</button>
    </div>
   `;

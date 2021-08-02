@@ -2,6 +2,7 @@ const apiUrl = 'https://drafthouse.com/s/mother/v1/page/market/main/austin';
 export class CinemasService {
   static selector = 'cinemasService';
   selectedCinema: { id: string, name: string } = { id: '', name: '' };
+  movies: { id: string, name: string, slug: string }[] = [{ id: '1', name: 'The Suicide Squad', slug: 'the-suicide-squad' }];
   cinemas: { id: string, name: string }[] = [{
     id: '0008',
     name: 'Mueller'
@@ -30,6 +31,19 @@ export class CinemasService {
     }
 
     return this.selectedCinema;
+  }
+
+  async getMoviesFromAlamo() {
+    try {
+      const { sessions, films } = await this.$http.get(apiUrl, { responseType: 'json' }).then((response: any) => {
+        return response.data.data;
+      });
+      const currentSessions = sessions.filter((session: any) => session.cinemaId === this.selectedCinema.id);
+      const filmsAtTheater = films.filter((film: any) => currentSessions.find((currentSession: any) => film.title === currentSession.filmName));
+      return filmsAtTheater;
+    } catch (exception) {
+      console.error(exception);
+    }
   }
 
   async getCinemasFromAlamo() {
