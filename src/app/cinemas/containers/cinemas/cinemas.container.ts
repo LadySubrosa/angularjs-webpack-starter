@@ -62,16 +62,14 @@ export class CinemasContainer implements angular.IComponentOptions {
   static selector = 'cinemas';
   static controller = CinemasController;
   static template = `
-  <div class="row">
-    <div class="col-md-12">
-      <h1>find a movie</h1>
-      <h2>select theater</h2>
-      <cinemas-list cinemas="$ctrl.cinemas" selected-cinema="$ctrl.selectedCinema.id" update-cinema="$ctrl.setSelectedCinema($event.id)"></cinemas-list>
-      <h2>Films playing at <span class="selected-cinema">{{$ctrl.selectedCinema.name}}</span></h>
-      <div class="movies-list" ng-repeat="movie in $ctrl.movies">
-        <a class="ticket-button" href="https://drafthouse.com/show/{{movie.slug}}">{{ movie.title }}</a>
+      <div class="content">
+        <h1>find a movie</h1>
+        <h2>select theater</h2>
+        <cinemas-list cinemas="$ctrl.cinemas" selected-cinema="$ctrl.selectedCinema.id" update-cinema="$ctrl.setSelectedCinema($event.id)"></cinemas-list>
+        <h2>Films playing at <span class="selected-cinema">{{$ctrl.selectedCinema.name}}</span></h>
+        <div class="movies-list" ng-repeat="movie in $ctrl.movies">
+          <a class="ticket-button" href="https://drafthouse.com/show/{{movie.slug}}">{{ movie.title }}</a>
+        </div>
       </div>
-      </div>
-  </div>
   `;
 }

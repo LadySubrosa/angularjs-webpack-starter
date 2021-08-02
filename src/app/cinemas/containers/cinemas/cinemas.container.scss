@@ -1,15 +1,21 @@
+@import url('https://use.typekit.net/dlx2mzy.css');
+
 cinemas {
+  font-family: futura-pt, sans-serif;
   display: block;
   width: 100%;
   max-width: 750px;
   margin: auto;
-  padding: 50px;
+  padding: 32px;
   background: #ffffff;
   box-shadow: 0px 2px 4px rgba(24, 17, 3, 0.14), 0px 3px 4px rgba(0, 0, 0, 0.12),
     0px 1px 5px rgba(24, 17, 3, 0.2);
   border-radius: 4px;
+  .content {
+    width: 90%;
+    margin: auto;
+  }
   h1 {
-    font-family: 'Futura PT' sans-serif;
     font-size: 26px;
     line-height: 30px;
     /* identical to box height, or 115% */
@@ -19,21 +25,26 @@ cinemas {
     color: #000000;
   }
   h2 {
-    font-family: 'Futura PT' sans-serif;
     font-size: 16px;
     line-height: 20px;
     /* identical to box height, or 125% */
     letter-spacing: 0.5px;
     text-transform: uppercase;
     color: rgba(9, 9, 9, 0.6);
+    .selected-cinema {
+      color: rgba(0, 0, 0, 1);
+    }
   }
   cinemas-list {
     display: grid;
     margin: auto;
     width: 100%;
     grid-template-columns: 1fr 1fr 1fr;
+    grid-gap: 15px;
+    justify-content: space-between;
+    margin-bottom: 20px;
     button {
-      width: 90%;
+      width: 100%;
       min-width: 176px;
       display: block;
       color: #000;
@@ -43,7 +54,6 @@ cinemas {
       border: 1px solid #090909;
       box-sizing: border-box;
       border-radius: 4px;
-      font-family: 'Futura PT' sans-serif;
       font-weight: bold;
       font-size: 16px;
       line-height: 20px;
@@ -51,7 +61,7 @@ cinemas {
       letter-spacing: 0.5px;
       text-transform: uppercase;
       padding: 13px 0;
-      margin: 15px;
+      margin-bottom: 15px;
       transition: background-color 200ms ease-in, border 200ms ease-in;
       &.selected,
       &:hover,
@@ -65,7 +75,6 @@ cinemas {
   a:link.ticket-button,
   a:active.ticket-button,
   a:visited.ticket-button {
-    font-family: 'Futura PT' sans-serif;
     font-weight: bold;
     font-size: 22px;
     line-height: 28px;
@@ -79,17 +88,36 @@ cinemas {
     border-radius: 4px;
     color: black;
     display: block;
-    width: 90%;
-    padding: 13px 10px;
+    width: 100%;
+    padding: 13px 24px;
     margin: 20px auto;
     transition: background-color 200ms ease-in, border 200ms ease-in,
       color 200ms ease-in;
+    position: relative;
+    &::after {
+      content: '';
+      display: block;
+      position: absolute;
+      top: 30%;
+      bottom: 30%;
+      right: 12px;
+      margin-left: auto;
+      margin-right: 0;
+      width: 24px;
+      height: 24px;
+      background-image: url('../../../../assets/cartgrey.png');
+      background-size: 100% 100%;
+      background-repeat: no-repeat;
+    }
     &:hover,
     &:focus {
       text-decoration: none;
       color: #f0b323;
       background-color: #000;
       border-color: #000;
+      &::after {
+        background-image: url('../../../../assets/cartgold.png');
+      }
     }
   }
 }
