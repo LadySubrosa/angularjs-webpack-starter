@@ -1,11 +1,21 @@
 .app {
   .welcome {
+    width: 150px;
     height: auto;
     margin: auto;
     display: block;
+    @media (min-width: 768px) {
+      width: 260px;
+    }
   }
   .logo {
-    margin: 20px auto 40px;
+    width: 300px;
+    height: auto;
+    margin: 20px auto 20px;
     display: block;
+    @media (min-width: 768px) {
+      width: 552px;
+      margin: 20px auto 40px;
+    }
   }
 }
